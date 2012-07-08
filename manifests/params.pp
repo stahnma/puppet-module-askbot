@@ -41,6 +41,7 @@ class askbot::params {
     }
 
     'Debian': {
+       $py_location = "/usr/local/lib/python2.7/dist-packages"
        $prereqs = [ 'python-pip', 'python-dev', 'python-psycopg2'  ]
        $webserver = 'apache2'
        $wsgi = "libapache2-mod-wsgi"
