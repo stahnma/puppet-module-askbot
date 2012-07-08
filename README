@@ -1,16 +1,24 @@
 askbot
+------
+This module sets up askbot as the primary URL for the host at / using apache's httpd server in conjunction with mod_wsgi.
 
-This is the askbot module.
+Known Issues
+-------
+* You need stdlib and cprice-postgresql, neither of which are currently on the forge.
+* There is no hiera integration, it's all in params.pp
+* Only tested in Centos6 and Debian Wheezy
+* The opininos file is kind of specific to a test instance I ran
+
 
 License
 -------
+ASL 2.0
 
 
 Contact
 -------
-
+stahnma@puppetlabs.com
 
 Support
 -------
-
-Please log tickets and issues at our [Projects site](http://projects.example.com)
+https://github.com/stahnma/puppet-module-askbot/issues
