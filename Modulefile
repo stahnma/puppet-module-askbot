@@ -10,5 +10,5 @@ project_page 'http://github.com/stahnma/puppet-module-askbot'
 ## Add dependencies, if any:
 # dependency 'username/name', '>= 1.2.0'
 #
-#dependency 'puppetlabs/stdlib'
+dependency 'puppetlabs/stdlib', '>2.3.3'
 #dependency 'cprice/postgresql'
