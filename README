@@ -6,9 +6,13 @@ Known Issues
 -------
 * You need stdlib and cprice-postgresql, neither of which are currently on the forge.
 * There is no hiera integration, it's all in params.pp
-* Only tested in Centos6 and Debian Wheezy
-* The opininos file is kind of specific to a test instance I ran
 
+
+Limitations
+-------
+* On EL, this modules assumes you have EPEL configured (why wouldn't you). It also does not attempt to modify IPtables for you.
+* Only tested in Centos6 and Debian Wheezy
+* The opinions file is kind of specific to a test instance I ran
 
 License
 -------
