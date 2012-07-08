@@ -3,6 +3,10 @@ askbot
 This module sets up askbot as the primary URL for the host at / using apache's httpd server in conjunction with mod_wsgi.
 See http://askbot.org
 
+Setup
+------
+* Edit params.pp accordingly.
+
 Known Issues
 -------
 * You need stdlib  (> 2.3.3) (not released as of 07-07-2012)
