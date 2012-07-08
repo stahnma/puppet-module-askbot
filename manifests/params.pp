@@ -30,12 +30,14 @@ class askbot::params {
   case $::osfamily {
 
     'RedHat': {
-      $prereqs = [ 'mod_wsgi' ]
+      $py_location = "/usr/lib/python2.6/site-packages"
+      $prereqs = [  ]
       $webserver = 'httpd'
       $wsgi = 'mod_wsgi'
       $web_user = 'apache'
       $web_group = 'apache'
       $askbot_provider = 'yum'
+      $askbot_webconfig = "/etc/httpd/conf.d/askbot.conf"
     }
 
     'Debian': {
@@ -45,6 +47,7 @@ class askbot::params {
        $web_user = 'www-data'
        $web_group = 'www-data'
        $askbot_provider = 'pip'
+       $askbot_webconfig = "/etc/apache2/conf.d/askbot.conf"
      } 
   }
 

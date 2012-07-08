@@ -3,9 +3,9 @@ class askbot inherits askbot::params {
   include askbot::postgres
   include askbot::httpd
   include askbot::opinions
-  
+
   # Resource Defaults
-  Exec { 
+  Exec {
     path => [ "/bin", "/usr/bin", "/sbin", "/usr/sbin" ],
     logoutput => on_failure,
   }
@@ -77,14 +77,15 @@ class askbot inherits askbot::params {
      group => 0,
    }
 
-  file { "/etc/askbot/sites/ask/config/manage.py": 
+  file { "/etc/askbot/sites/ask/config/manage.py":
      ensure => present,
      source => "puppet:///modules/askbot/setup_templates/manage.py",
      owner => 0,
      group => 0,
    }
 
-  file { "/etc/apache2/conf.d/askbot.conf":
+  file { "askbot_webconfig":
+     path => $askbot_webconfig,
      ensure => present,
      content => template('askbot/webserver_config.erb'),
      require => File['/etc/askbot/sites/ask/config/settings.py'],
@@ -110,7 +111,7 @@ class askbot inherits askbot::params {
     command   => "python manage.py migrate django_authopenid",
     require   => [ Exec['askbot_migrate_db'] ],
   }
-      
+
   file { "/etc/askbot/sites/ask/config/settings.py":
     ensure => present,
     content => template('askbot/settings.erb'),
@@ -120,5 +121,4 @@ class askbot inherits askbot::params {
     require => File["/etc/askbot/sites/ask/config"],
     notify => Service['webserver'],
   }
-
 }

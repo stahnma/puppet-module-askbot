@@ -13,11 +13,11 @@ class askbot::httpd {
     require => Package[$wsgi],
   }
 
-  service { "webserver": 
+  service { "webserver":
     ensure => running,
     enable => true,
     name => $webserver,
-    require => Package['webserver']
+    require => [ Package['webserver'], Exec[askbot_build_assets] ] ,
   }
 
 }

@@ -105,6 +105,9 @@ MIDDLEWARE_CLASSES = (
     #'django.middleware.cache.FetchFromCacheMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     #'django.middleware.sqlprint.SqlPrintingMiddleware',
+    <% if @osfamily =~ /redhat/i -%>
+    'askbot.middleware.pagesize.QuestionsPageSizeMiddleware',
+    <% end -%>
 
     #below is askbot stuff for this tuple
     'askbot.middleware.anon_user.ConnectToSessionMessagesMiddleware',
