@@ -1,0 +1,30 @@
+Alias /m/  <%= scope.lookupvar('askbot_home') -%>/skins/
+Alias /admin/media/ <%= @py_location -%>/django/contrib/admin/media/
+
+<Directory <%= scope.lookupvar('askbot_home') -%>/skins>
+ Order deny,allow
+ Allow from all
+</Directory>
+
+WSGIDaemonProcess askbot user=<%= scope.lookupvar('web_user') -%> group=<%= scope.lookupvar('web_group') -%> maximum-requests=1000 display-name=askbot processes=<%= @processorcount -%> threads=1 shutdown-timeout=10 python-path=/etc/askbot/sites/ask
+<% if @osfamily == 'redhat' -%>
+WSGISocketPrefix run/wsgi
+<% end -%>
+WSGIRestrictStdout On
+WSGIRestrictSignal Off
+WSGIPythonOptimize 1
+
+WSGIScriptAlias /  /usr/sbin/askbot.wsgi
+
+<Location />
+ WSGIProcessGroup askbot
+ Order deny,allow
+ Allow from all
+</Location>
+
+Alias /upfiles/ <%= scope.lookupvar('askbot_home')-%>/upfiles/ask
+
+<Directory <%= scope.lookupvar('askbot_home')-%>/upfiles/ask>
+    Order deny,allow
+    Allow from all
+</Directory>
