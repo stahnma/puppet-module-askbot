@@ -1,12 +1,14 @@
 askbot
 ------
 This module sets up askbot as the primary URL for the host at / using apache's httpd server in conjunction with mod_wsgi.
+See http://askbot.org
 
 Known Issues
 -------
-* You need stdlib  (> 2.3.3) and cprice-postgresql (with a patch I just submitted), neither of which are currently on the forge.
+* You need stdlib  (> 2.3.3) (not released as of 07-07-2012)
+* cprice-postgresql [ branch: feature/master/align-with-puppetlabs-mysql ] (with a patch I just submitted)
+* stdlib and cprice-postgresql are not on the forge with the patches we need currently
 * There is no hiera integration, it's all in params.pp
-
 
 Limitations
 -------
