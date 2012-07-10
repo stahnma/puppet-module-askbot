@@ -1,4 +1,11 @@
-class askbot inherits askbot::params {
+class askbot (
+  $prereqs          = $askbot::params::prereqs,
+  $web_user         = $askbot::params::web_user,
+  $web_group        = $askbot::params::web_group,
+  $askbot_provider  = $askbot::params::askbot_provider,
+  $askbot_home      = $askbot::params::askbot_home,
+  $askbot_webconfig = $askbot::params::askbot_webconfig
+) inherits askbot::params {
 
   include askbot::postgres
   include askbot::httpd
@@ -94,9 +101,9 @@ class askbot inherits askbot::params {
 
   file { "/usr/sbin/askbot.wsgi":
      ensure => present,
-     owner => 0,
-     group => 0,
-     mode => 0755,
+     owner  => 0,
+     group  => 0,
+     mode   => 0755,
      source => "puppet:///modules/askbot/askbot.wsgi",
   }
 
@@ -107,9 +114,9 @@ class askbot inherits askbot::params {
    }
 
   exec { "askbot_add_auth":
-    cwd       => "/etc/askbot/sites/ask/config/",
-    command   => "python manage.py migrate django_authopenid",
-    require   => [ Exec['askbot_migrate_db'] ],
+    cwd     => "/etc/askbot/sites/ask/config/",
+    command => "python manage.py migrate django_authopenid",
+    require => [ Exec['askbot_migrate_db'] ],
   }
 
   file { "/etc/askbot/sites/ask/config/settings.py":
@@ -121,4 +128,5 @@ class askbot inherits askbot::params {
     require => File["/etc/askbot/sites/ask/config"],
     notify  => Service['webserver'],
   }
+
 }
